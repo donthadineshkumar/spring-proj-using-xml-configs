@@ -1,0 +1,45 @@
+<ehcache>	
+	
+	<!-- if eternal is true then element stays in cache always -->
+	<!-- maxEntriesLocalHeap : cache can contain a max in memory of 10000 elements -->
+	<!-- an element expires if it is idle for 5 mins ( 300 ) timeToIdleSeconds -->
+	<!-- an element expires if it is lives for more than 10 mins ( 600 ) timeToLiveSeconds -->
+	<!-- if overflowToDisk is true then cache overflows to disk  -->
+	<!-- when eternal is true then dont specify timeToLiveSeconds & timeToIdleSeconds -->
+	<!-- maxEntriesLocalHeap="10000" maxEntriesLocalDisk ="1000"
+	If there are more than  10000 elements it will overflow to the disk cache, In linux
+	it will be /tmp-->
+	<!-- <defaultCache></defaultCache>
+	The defaultCache has an implict name "dafault" which is a reserved cache name -->
+	<!--if overflowToDisk is not given it is false- means cache only stays in 
+	memory so maximium cache size is the maxEntriesLocalHeap   -->
+	<!-- Note: g/G for GIGABYTES m/M MEGABYTES k/K KILOBYTES -->
+	<!-- If you specify a maxBytesLocalHeap, you can't use
+	maxEntriesLocalHeap attr.  maxEntriesLocalHeap can't be
+	used if a CacheManager mayBytesLocalHeap is set. -->
+	<!-- memoryStoreEvictionPolicy 
+	Policy would be enforced upon reaching the maxEntriesLocalHeap limit.
+	Default policy is Least Recently Used(LRU).
+	Other policies available :
+	First In First out (FIFO) and 
+	Less Frequently Used(LFU)	
+	 -->
+	 <!-- maxBytesLocalDisk 
+	 As for maxBytesLocalHeap, but specifies the limit of disk
+	 storage this cache will ever use. -->
+	 <!-- diskExpiryThreadIntervalSeconds
+	 The number of seconds between runs of the disk expiry thread.
+	 The default value is 120 seconds -->
+	 <!-- diskSpoolBufferSizeMB 
+	 This is the size to allocate the DiskStore for a spool buffer. Writes 
+	 are made to this area and then asynchronously written to disk.
+	 The default size is 30MB -->
+	 <!-- Each spool buffer is only be used by its cache.
+	 If your get OutOfMemory errors consider lowering this value.
+	 To improve DiskStore performance consider increasing it. -->
+	 	 
+	<cache name="quotesCache" maxBytesLocalHeap="10m"
+			timeToLiveSeconds="300"  timeToIdleSeconds="120" eternal="false"
+			overflowToDisk="false">
+	</cache>
+</ehcache>
